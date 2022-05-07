@@ -1,20 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package graphic.tool.db;
 
-/**
- *
- * @author guilhermekoller
- */
+import java.sql.*;
+
 public class GraphicToolDb {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        System.out.println("TESTE");
+        try{
+            Connection conn;
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/livrosdb", "koller", "password");
+            
+            Statement stmt;
+            stmt = conn.createStatement();
+            
+            ResultSet rs;
+            rs = stmt.executeQuery("SHOW COLUMNS FROM livrosdb.books");
+            
+            while(rs.next()){
+                System.out.print(rs.getString(1)+" ");
+                System.out.print("PRI".equals(rs.getString(4)) ? "PK" : "");
+                System.out.println("");
+            }
+            
+            conn.close();
+            
+        }catch(SQLException  e){
+            System.out.println(e);
+        }
     }
-    
 }
