@@ -4,8 +4,14 @@
  */
 package graphic.tool.db;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -45,10 +51,11 @@ public class UI extends javax.swing.JFrame {
         ExportCVSButton = new javax.swing.JButton();
         TextAreaScrollPanel = new javax.swing.JScrollPane();
         QueriesTextArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        FilePathTextField = new javax.swing.JTextField();
+        SaveDatabaseButton = new javax.swing.JButton();
+        DatabaseTextField = new javax.swing.JTextField();
+        UserTextField = new javax.swing.JTextField();
+        PasswordTextField = new javax.swing.JTextField();
         ComboBoxDB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,10 +103,17 @@ public class UI extends javax.swing.JFrame {
         });
 
         ExportCVSButton.setText("Export CSV");
+        ExportCVSButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportCVSButtonActionPerformed(evt);
+            }
+        });
 
         QueriesTextArea.setColumns(20);
         QueriesTextArea.setRows(5);
         TextAreaScrollPanel.setViewportView(QueriesTextArea);
+
+        FilePathTextField.setText("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv");
 
         javax.swing.GroupLayout QueriesPannelLayout = new javax.swing.GroupLayout(QueriesPannel);
         QueriesPannel.setLayout(QueriesPannelLayout);
@@ -110,7 +124,8 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(TextAreaScrollPanel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TableScrollPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
                     .addGroup(QueriesPannelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(FilePathTextField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ExportCVSButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ExportJSONButton)
@@ -129,31 +144,32 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(QueriesPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExecuteButton)
                     .addComponent(ExportJSONButton)
-                    .addComponent(ExportCVSButton))
+                    .addComponent(ExportCVSButton)
+                    .addComponent(FilePathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
         MainPanel.addTab("Queries", QueriesPannel);
 
-        jButton1.setText("Save");
+        SaveDatabaseButton.setText("Save");
 
-        jTextField1.setText("Database");
+        DatabaseTextField.setText("Database");
 
-        jTextField2.setText("User");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        UserTextField.setText("User");
+        UserTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                UserTextFieldActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("Password");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        PasswordTextField.setText("Password");
+        PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                PasswordTextFieldActionPerformed(evt);
             }
         });
 
-        ComboBoxDB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MySQL", "Postgree"}));
+        ComboBoxDB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,15 +181,15 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MainPanel)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DatabaseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ComboBoxDB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SaveDatabaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -182,10 +198,10 @@ public class UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SaveDatabaseButton)
+                    .addComponent(DatabaseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboBoxDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MainPanel))
@@ -218,13 +234,37 @@ public class UI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ExecuteButtonActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void UserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_UserTextFieldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_PasswordTextFieldActionPerformed
+
+    private void ExportCVSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportCVSButtonActionPerformed
+        try {
+            TableModel model = ResultTable.getModel();
+            FileWriter csv = new FileWriter(new File(FilePathTextField.getText()));
+
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                csv.write(model.getColumnName(i) + ",");
+            }
+
+            csv.write("\n");
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    csv.write(model.getValueAt(i, j).toString() + ",");
+                }
+                csv.write("\n");
+            }
+
+            csv.close();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_ExportCVSButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,20 +304,21 @@ public class UI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxDB;
     private javax.swing.JTree ConnectionsTree;
+    private javax.swing.JTextField DatabaseTextField;
     private javax.swing.JButton ExecuteButton;
     private javax.swing.JButton ExportCVSButton;
     private javax.swing.JButton ExportJSONButton;
+    private javax.swing.JTextField FilePathTextField;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JTabbedPane MainPanel;
+    private javax.swing.JTextField PasswordTextField;
     private javax.swing.JPanel QueriesPannel;
     private javax.swing.JTextArea QueriesTextArea;
     private javax.swing.JTable ResultTable;
+    private javax.swing.JButton SaveDatabaseButton;
     private javax.swing.JScrollPane ScrollTreePanel;
     private javax.swing.JScrollPane TableScrollPanel;
     private javax.swing.JScrollPane TextAreaScrollPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField UserTextField;
     // End of variables declaration//GEN-END:variables
 }

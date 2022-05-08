@@ -29,15 +29,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="MainPanel" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jTextField1" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="DatabaseTextField" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="UserTextField" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField3" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="PasswordTextField" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="ComboBoxDB" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="SaveDatabaseButton" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -50,10 +50,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveDatabaseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DatabaseTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="UserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PasswordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ComboBoxDB" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -120,7 +120,8 @@
                           <Component id="TextAreaScrollPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="TableScrollPanel" alignment="0" pref="881" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="FilePathTextField" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="ExportCVSButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="ExportJSONButton" min="-2" max="-2" attributes="0"/>
@@ -144,6 +145,7 @@
                           <Component id="ExecuteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ExportJSONButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ExportCVSButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="FilePathTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
@@ -189,6 +191,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Export CSV"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportCVSButtonActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="TextAreaScrollPanel">
               <AuxValues>
@@ -205,34 +210,39 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JTextField" name="FilePathTextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="SaveDatabaseButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="DatabaseTextField">
       <Properties>
         <Property name="text" type="java.lang.String" value="Database"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="UserTextField">
       <Properties>
         <Property name="text" type="java.lang.String" value="User"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UserTextFieldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="PasswordTextField">
       <Properties>
         <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PasswordTextFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="ComboBoxDB">
