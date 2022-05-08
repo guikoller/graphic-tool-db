@@ -4,15 +4,20 @@
  */
 package graphic.tool.db;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
+import org.json.CDL;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import org.json.JSONException;
 
 /**
  *
@@ -213,7 +218,23 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExportJSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportJSONButtonActionPerformed
-        // TODO add your handling code here:
+        exportCSV();
+        try {
+            InputStream is = new FileInputStream("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv");
+            String csv = new BufferedReader(
+                    new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining("\n"));        
+            // Convert csv text to JSON string, and save it 
+            // to a data.json file.
+            String json = CDL.toJSONArray(csv).toString(2);
+            Files.write(Path.of("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.json"), json.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_ExportJSONButtonActionPerformed
 
     private void ExecuteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExecuteButtonActionPerformed
@@ -243,12 +264,17 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
     private void ExportCVSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportCVSButtonActionPerformed
+        exportCSV();
+    }//GEN-LAST:event_ExportCVSButtonActionPerformed
+    
+    private void exportCSV(){
         try {
             TableModel model = ResultTable.getModel();
-            FileWriter csv = new FileWriter(new File(FilePathTextField.getText()));
+            FileWriter csv;
+            csv = new FileWriter(new File("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv"));
 
             for (int i = 0; i < model.getColumnCount(); i++) {
-                csv.write(model.getColumnName(i) + ",");
+                csv.write(model.getColumnName(i) + ", ");
             }
 
             csv.write("\n");
@@ -264,8 +290,7 @@ public class UI extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println(ex);
         }
-    }//GEN-LAST:event_ExportCVSButtonActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
