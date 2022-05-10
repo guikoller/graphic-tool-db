@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.7" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -90,7 +90,12 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTree" name="ConnectionsTree">
+            <Component class="javax.swing.JTree" name="LimitRowsTextField">
+              <Properties>
+                <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+                  <TreeModel code="Connections"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -120,8 +125,13 @@
                           <Component id="TextAreaScrollPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="TableScrollPanel" alignment="0" pref="881" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="FilePathTextField" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Labelrow" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CheckBoxLimit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="MaxRowsTextField" min="-2" pref="107" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="ExportCVSButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="ExportJSONButton" min="-2" max="-2" attributes="0"/>
@@ -137,15 +147,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TextAreaScrollPanel" pref="336" max="32767" attributes="0"/>
+                      <Component id="TextAreaScrollPanel" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TableScrollPanel" min="-2" pref="223" max="-2" attributes="0"/>
+                      <Component id="TableScrollPanel" pref="309" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ExecuteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ExportJSONButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ExportCVSButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="FilePathTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="CheckBoxLimit" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Labelrow" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ExecuteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ExportJSONButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ExportCVSButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="MaxRowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
@@ -210,10 +224,23 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="FilePathTextField">
+            <Component class="javax.swing.JTextField" name="MaxRowsTextField">
               <Properties>
-                <Property name="text" type="java.lang.String" value="/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv"/>
+                <Property name="text" type="java.lang.String" value="1000"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Labelrow">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limit Rows"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="CheckBoxLimit">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckBoxLimitActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -223,6 +250,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveDatabaseButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="DatabaseTextField">
       <Properties>
@@ -248,12 +278,7 @@
     <Component class="javax.swing.JComboBox" name="ComboBoxDB">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

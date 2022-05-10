@@ -17,14 +17,21 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.swing.JTree;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import org.json.JSONException;
+import java.lang.*;
 
 /**
  *
  * @author guilhermekoller
  */
 public class UI extends javax.swing.JFrame {
+
     Connection connection;
+
     /**
      * Creates new form UI
      */
@@ -33,6 +40,8 @@ public class UI extends javax.swing.JFrame {
 //        connection.setUser("koller");
 //        connection.setPassword("password");
         initComponents();
+        ComboBoxDB.addItem("MySQL");
+        ComboBoxDB.addItem("PostgreSQL");
     }
 
     /**
@@ -46,7 +55,7 @@ public class UI extends javax.swing.JFrame {
 
         LeftPanel = new javax.swing.JPanel();
         ScrollTreePanel = new javax.swing.JScrollPane();
-        ConnectionsTree = new javax.swing.JTree();
+        LimitRowsTextField = new javax.swing.JTree();
         MainPanel = new javax.swing.JTabbedPane();
         QueriesPannel = new javax.swing.JPanel();
         TableScrollPanel = new javax.swing.JScrollPane();
@@ -56,7 +65,9 @@ public class UI extends javax.swing.JFrame {
         ExportCVSButton = new javax.swing.JButton();
         TextAreaScrollPanel = new javax.swing.JScrollPane();
         QueriesTextArea = new javax.swing.JTextArea();
-        FilePathTextField = new javax.swing.JTextField();
+        MaxRowsTextField = new javax.swing.JTextField();
+        Labelrow = new javax.swing.JLabel();
+        CheckBoxLimit = new javax.swing.JCheckBox();
         SaveDatabaseButton = new javax.swing.JButton();
         DatabaseTextField = new javax.swing.JTextField();
         UserTextField = new javax.swing.JTextField();
@@ -67,7 +78,9 @@ public class UI extends javax.swing.JFrame {
 
         LeftPanel.setBackground(new java.awt.Color(230, 235, 230));
 
-        ScrollTreePanel.setViewportView(ConnectionsTree);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Connections");
+        LimitRowsTextField.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ScrollTreePanel.setViewportView(LimitRowsTextField);
 
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
@@ -118,7 +131,16 @@ public class UI extends javax.swing.JFrame {
         QueriesTextArea.setRows(5);
         TextAreaScrollPanel.setViewportView(QueriesTextArea);
 
-        FilePathTextField.setText("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv");
+        MaxRowsTextField.setText("1000");
+
+        Labelrow.setText("Limit Rows");
+
+        CheckBoxLimit.setSelected(true);
+        CheckBoxLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxLimitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout QueriesPannelLayout = new javax.swing.GroupLayout(QueriesPannel);
         QueriesPannel.setLayout(QueriesPannelLayout);
@@ -129,8 +151,13 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(TextAreaScrollPanel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TableScrollPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
                     .addGroup(QueriesPannelLayout.createSequentialGroup()
-                        .addComponent(FilePathTextField)
+                        .addContainerGap()
+                        .addComponent(Labelrow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CheckBoxLimit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(MaxRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ExportCVSButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ExportJSONButton)
@@ -142,21 +169,29 @@ public class UI extends javax.swing.JFrame {
             QueriesPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QueriesPannelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TextAreaScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addComponent(TextAreaScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TableScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(QueriesPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ExecuteButton)
-                    .addComponent(ExportJSONButton)
-                    .addComponent(ExportCVSButton)
-                    .addComponent(FilePathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(QueriesPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CheckBoxLimit)
+                    .addComponent(Labelrow)
+                    .addGroup(QueriesPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ExecuteButton)
+                        .addComponent(ExportJSONButton)
+                        .addComponent(ExportCVSButton)
+                        .addComponent(MaxRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
 
         MainPanel.addTab("Queries", QueriesPannel);
 
         SaveDatabaseButton.setText("Save");
+        SaveDatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveDatabaseButtonActionPerformed(evt);
+            }
+        });
 
         DatabaseTextField.setText("Database");
 
@@ -173,8 +208,6 @@ public class UI extends javax.swing.JFrame {
                 PasswordTextFieldActionPerformed(evt);
             }
         });
-
-        ComboBoxDB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,35 +254,48 @@ public class UI extends javax.swing.JFrame {
         exportCSV();
         try {
             InputStream is = new FileInputStream("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv");
-            String csv = new BufferedReader(
-                    new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8))
-                    .lines()
-                    .collect(Collectors.joining("\n"));        
+            String csv = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
             // Convert csv text to JSON string, and save it 
             // to a data.json file.
             String json = CDL.toJSONArray(csv).toString(2);
             Files.write(Path.of("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.json"), json.getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         } catch (JSONException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_ExportJSONButtonActionPerformed
 
     private void ExecuteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExecuteButtonActionPerformed
         String query = QueriesTextArea.getText();
+        String database = DatabaseTextField.getText();
+        String user = UserTextField.getText();
+        String password = PasswordTextField.getText();
+        String DB = (String) ComboBoxDB.getSelectedItem();
+        System.out.println(DB);
+        int rows = myStringToInteger(MaxRowsTextField.getText());
+
         try {
             java.sql.Connection conn;
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/livrosdb", "koller", "password");
-            
+
+            if ("MySQL".equals(DB)) {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/" + database, user, password);
+            } else {
+                conn = DriverManager.getConnection("jdbc:postgresql://localhost/" + database, user, password);
+            }
+
             Statement stmt;
             stmt = conn.createStatement();
-            
+
+            if (CheckBoxLimit.isSelected()) {
+                stmt.setMaxRows(rows);
+            }
+
             ResultSet rs;
             rs = stmt.executeQuery(query);
             ResultTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
+
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -266,8 +312,64 @@ public class UI extends javax.swing.JFrame {
     private void ExportCVSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportCVSButtonActionPerformed
         exportCSV();
     }//GEN-LAST:event_ExportCVSButtonActionPerformed
-    
-    private void exportCSV(){
+
+    private void SaveDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDatabaseButtonActionPerformed
+        String database = DatabaseTextField.getText();
+        String user = UserTextField.getText();
+        String password = PasswordTextField.getText();
+        String DB = (String) ComboBoxDB.getSelectedItem();
+        System.out.println(DB);
+
+        DefaultTreeModel model = (DefaultTreeModel) LimitRowsTextField.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        model.insertNodeInto(new DefaultMutableTreeNode(database), root, root.getChildCount());
+
+        DefaultTreeModel child = (DefaultTreeModel) LimitRowsTextField.getModel();
+        DefaultMutableTreeNode root2 = (DefaultMutableTreeNode) child.getRoot();
+        child.insertNodeInto(new DefaultMutableTreeNode("teste"), root2, root2.getChildCount());
+
+        try {
+            java.sql.Connection conn;
+
+            if ("MySQL".equals(DB)) {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/" + database, user, password);
+            } else {
+                conn = DriverManager.getConnection("jdbc:postgresql://localhost/" + database, user, password);
+            }
+
+            Statement stmt;
+            stmt = conn.createStatement();
+
+            ResultSet rs;
+            rs = stmt.executeQuery("show tables");
+            
+            while(rs.next()){
+                ResultSet tablesRs;
+                Statement stmtAux = conn.createStatement();
+                tablesRs = stmtAux.executeQuery("show columns from " + rs.getString(1));
+                while(tablesRs.next()){
+                    if("PRI".equals(tablesRs.getString(4))){
+                        System.out.println(tablesRs.getString(1) + " PK");
+                    }else if("MUL".equals(tablesRs.getString(4))){
+                        System.out.println(tablesRs.getString(1) + " FK");
+                    }else{
+                        System.out.println(tablesRs.getString(1));
+                    }
+
+                }
+                System.out.println("----------");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_SaveDatabaseButtonActionPerformed
+
+    private void CheckBoxLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxLimitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBoxLimitActionPerformed
+
+    private void exportCSV() {
         try {
             TableModel model = ResultTable.getModel();
             FileWriter csv;
@@ -291,6 +393,7 @@ public class UI extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -326,16 +429,35 @@ public class UI extends javax.swing.JFrame {
         });
     }
 
+    public static int myStringToInteger(String str) {
+        int answer = 0, factor = 1;
+        for (int i = str.length() - 1; i >= 0; i--) {
+            answer += (str.charAt(i) - '0') * factor;
+            factor *= 10;
+        }
+        return answer;
+    }
+
+    public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UI().setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckBoxLimit;
     private javax.swing.JComboBox<String> ComboBoxDB;
-    private javax.swing.JTree ConnectionsTree;
     private javax.swing.JTextField DatabaseTextField;
     private javax.swing.JButton ExecuteButton;
     private javax.swing.JButton ExportCVSButton;
     private javax.swing.JButton ExportJSONButton;
-    private javax.swing.JTextField FilePathTextField;
+    private javax.swing.JLabel Labelrow;
     private javax.swing.JPanel LeftPanel;
+    private javax.swing.JTree LimitRowsTextField;
     private javax.swing.JTabbedPane MainPanel;
+    private javax.swing.JTextField MaxRowsTextField;
     private javax.swing.JTextField PasswordTextField;
     private javax.swing.JPanel QueriesPannel;
     private javax.swing.JTextArea QueriesTextArea;

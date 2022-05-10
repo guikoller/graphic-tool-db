@@ -1,7 +1,7 @@
 [
   {
     "cover": "Pearson",
-    "": "[B@2c6d1262",
+    "": "[B@13c4a307",
     "year": "4",
     "author": "Stuart Russell",
     "edition": "Peter Norvig",
@@ -40,7 +40,7 @@
     "title": "Hands-On Machine Learning with Scikit-Learn"
   },
   {
-    "cover": "[B@734ea361",
+    "cover": "[B@e2f26a6",
     "": "",
     "year": "2020-01-01",
     "author": "Ethem Alpaydin",
@@ -60,7 +60,7 @@
     "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
   },
   {
-    "cover": "[B@7602866d",
+    "cover": "[B@26a1ae00",
     "": "",
     "year": "2013-01-01",
     "author": "Norbert Wiener",
@@ -70,7 +70,7 @@
     "title": "Cybernetics: Second Edition: Or the Control and Communication in the Animal and the Machine"
   },
   {
-    "cover": "[B@632c8273",
+    "cover": "[B@35462880",
     "": "",
     "year": "1988-01-01",
     "author": "Norbert Wiener",
@@ -91,7 +91,7 @@
   },
   {
     "cover": "Pearson",
-    "": "[B@45955545",
+    "": "[B@7a460ac",
     "year": "7",
     "author": "Ramez Elmasri",
     "edition": "Shamkant Navathe",
@@ -111,7 +111,7 @@
   },
   {
     "cover": "Prentice Hall",
-    "": "[B@20fea3e5",
+    "": "[B@285830d5",
     "year": "1",
     "author": "Brian W. Kernighan",
     "edition": "Dennis Ritchie",
@@ -121,7 +121,7 @@
   },
   {
     "cover": "Oracle Press",
-    "": "[B@3e99ceb6",
+    "": "[B@337cf8a4",
     "year": "5",
     "author": "Volume I: Fundamentals",
     "edition": "Cay Horstmann",
@@ -150,7 +150,7 @@
     "title": "Intro to Python for Computer Science and Data Science: Learning to Program with Ai"
   },
   {
-    "cover": "[B@7685f791",
+    "cover": "[B@22b39cec",
     "": "",
     "year": "2018-01-01",
     "author": "Pedro Domingos",
@@ -160,7 +160,7 @@
     "title": "The Master Algorithm: How the Quest for the Ultimate Learning Machine Will Remake Our World"
   },
   {
-    "cover": "[B@63db3179",
+    "cover": "[B@798d30b5",
     "": "",
     "year": "2014-01-01",
     "author": "William Gibson",
@@ -181,7 +181,7 @@
   },
   {
     "cover": "Aleph",
-    "": "[B@6ce93e5a",
+    "": "[B@2a17bdb0",
     "year": "1",
     "author": "William Gibson",
     "edition": "Bruce Sterling",
@@ -190,7 +190,7 @@
     "title": "A Máquina Diferencial"
   },
   {
-    "cover": "[B@35096529",
+    "cover": "[B@2c3273fb",
     "": "",
     "year": "2020-01-01",
     "author": "William Gibson",
@@ -200,7 +200,7 @@
     "title": "Periféricos"
   },
   {
-    "cover": "[B@fe3ca08",
+    "cover": "[B@48498d73",
     "": "",
     "year": "2009-01-01",
     "author": "Neal Stephenson",
