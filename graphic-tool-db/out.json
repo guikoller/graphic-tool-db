@@ -1,212 +1,207 @@
 [
   {
-    "cover": "Pearson",
-    "": "[B@13c4a307",
-    "year": "4",
-    "author": "Stuart Russell",
-    "edition": "Peter Norvig",
-    "publisher": "2020-01-01",
-    "book_id": "1",
+    "": "",
+    "name": "Stuart Russell",
     "title": "Artificial Intelligence: A Modern Approach"
   },
   {
-    "cover": "1",
-    "": "2019-01-01",
-    "year": "Grant Beyleveld",
-    "author": "Interactive Guide to Artificial Intelligence",
-    "edition": "Jon Krohn",
-    "publisher": "Aglaé Bassens",
-    "book_id": "2",
+    "": "",
+    "name": "Peter Norvig",
+    "title": "Artificial Intelligence: A Modern Approach"
+  },
+  {
+    "": "Interactive Guide to Artificial Intelligence",
+    "name": "Jon Krohn",
     "title": "Deep Learning Illustrated: A Visual"
   },
   {
-    "cover": "2021-01-01",
-    "": "Yale University Press",
-    "year": "Kate Crawford",
-    "author": "Politics",
-    "edition": "and the Planetary Costs of Artificial Intelligence",
-    "publisher": "1",
-    "book_id": "3",
+    "": "Interactive Guide to Artificial Intelligence",
+    "name": "Grant Beyleveld",
+    "title": "Deep Learning Illustrated: A Visual"
+  },
+  {
+    "": "Interactive Guide to Artificial Intelligence",
+    "name": "Aglaé Bassens",
+    "title": "Deep Learning Illustrated: A Visual"
+  },
+  {
+    "": "Politics",
+    "name": "Kate Crawford",
     "title": "Atlas of AI: Power"
   },
   {
-    "cover": "Aurélien Géron",
-    "": "2",
-    "year": "Tools",
-    "author": "Keras",
-    "edition": "and TensorFlow: Concepts",
-    "publisher": "and Techniques to Build Intelligent Systems",
-    "book_id": "4",
+    "": "Keras",
+    "name": "Aurélien Géron",
     "title": "Hands-On Machine Learning with Scikit-Learn"
   },
   {
-    "cover": "[B@e2f26a6",
     "": "",
-    "year": "2020-01-01",
-    "author": "Ethem Alpaydin",
-    "edition": "4",
-    "publisher": "MIT Press",
-    "book_id": "5",
+    "name": "Ethem Alpaydin",
     "title": "Introduction to Machine Learning"
   },
   {
-    "cover": "André C P L F de Carvalho",
-    "": "2",
-    "year": "João Gama",
-    "author": "Katti Faceli",
-    "edition": "Ana Carolina Lorena",
-    "publisher": "Tiago Agostinho de Almeida",
-    "book_id": "6",
+    "": "",
+    "name": "Katti Faceli",
     "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
   },
   {
-    "cover": "[B@26a1ae00",
     "": "",
-    "year": "2013-01-01",
-    "author": "Norbert Wiener",
-    "edition": "2",
-    "publisher": "Martino Fine Books",
-    "book_id": "7",
+    "name": "Ana Carolina Lorena",
+    "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
+  },
+  {
+    "": "",
+    "name": "João Gama",
+    "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
+  },
+  {
+    "": "",
+    "name": "Tiago Agostinho de Almeida",
+    "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
+  },
+  {
+    "": "",
+    "name": "André C P L F de Carvalho",
+    "title": "Inteligência Artificial - Uma Abordagem de Aprendizado de Máquina"
+  },
+  {
+    "": "",
+    "name": "Norbert Wiener",
     "title": "Cybernetics: Second Edition: Or the Control and Communication in the Animal and the Machine"
   },
   {
-    "cover": "[B@35462880",
     "": "",
-    "year": "1988-01-01",
-    "author": "Norbert Wiener",
-    "edition": "1",
-    "publisher": "Da Capo",
-    "book_id": "8",
+    "name": "Norbert Wiener",
     "title": "The Human Use of Human Beings: Cybernetics and Society"
   },
   {
-    "cover": "2019-01-01",
-    "": "McGraw-Hill Education",
-    "year": "S. Sudarshan",
-    "author": "Abraham Silberschatz",
-    "edition": "Henry Korth",
-    "publisher": "7",
-    "book_id": "9",
+    "": "",
+    "name": "Abraham Silberschatz",
     "title": "Database System Concepts"
   },
   {
-    "cover": "Pearson",
-    "": "[B@7a460ac",
-    "year": "7",
-    "author": "Ramez Elmasri",
-    "edition": "Shamkant Navathe",
-    "publisher": "2012-01-01",
-    "book_id": "10",
+    "": "",
+    "name": "Henry Korth",
+    "title": "Database System Concepts"
+  },
+  {
+    "": "",
+    "name": "S. Sudarshan",
+    "title": "Database System Concepts"
+  },
+  {
+    "": "",
+    "name": "Ramez Elmasri",
     "title": "Fundamentals of Database Systems"
   },
   {
-    "cover": "2008-01-01",
-    "": "Pearson Prentice Hall",
-    "year": "Jennifer Widom",
-    "author": "Hector Garcia-Molina",
-    "edition": "Jeffrey D. Ullman",
-    "publisher": "2",
-    "book_id": "11",
+    "": "",
+    "name": "Shamkant Navathe",
+    "title": "Fundamentals of Database Systems"
+  },
+  {
+    "": "",
+    "name": "Hector Garcia-Molina",
     "title": "Database Systems: The Complete Book"
   },
   {
-    "cover": "Prentice Hall",
-    "": "[B@285830d5",
-    "year": "1",
-    "author": "Brian W. Kernighan",
-    "edition": "Dennis Ritchie",
-    "publisher": "1988-01-01",
-    "book_id": "12",
+    "": "",
+    "name": "Jeffrey D. Ullman",
+    "title": "Database Systems: The Complete Book"
+  },
+  {
+    "": "",
+    "name": "Jennifer Widom",
+    "title": "Database Systems: The Complete Book"
+  },
+  {
+    "": "",
+    "name": "Brian W. Kernighan",
     "title": "C Programming Language (ANSI)"
   },
   {
-    "cover": "Oracle Press",
-    "": "[B@337cf8a4",
-    "year": "5",
-    "author": "Volume I: Fundamentals",
-    "edition": "Cay Horstmann",
-    "publisher": "2021-01-01",
-    "book_id": "13",
+    "": "",
+    "name": "Dennis Ritchie",
+    "title": "C Programming Language (ANSI)"
+  },
+  {
+    "": "Volume I: Fundamentals",
+    "name": "Cay Horstmann",
     "title": "Core Java"
   },
   {
-    "cover": "2017-01-01",
-    "": "Pearson",
-    "year": "Harvey Deitel",
-    "author": "Early Objects",
-    "edition": "Paul Deitel",
-    "publisher": "1",
-    "book_id": "14",
+    "": "Early Objects",
+    "name": "Paul Deitel",
     "title": "Java How to Program"
   },
   {
-    "cover": "2019-01-01",
-    "": "Pearson",
-    "year": "Harvey Deitel",
-    "author": "Big Data and the Cloud",
-    "edition": "Paul Deitel",
-    "publisher": "1",
-    "book_id": "15",
+    "": "Early Objects",
+    "name": "Harvey Deitel",
+    "title": "Java How to Program"
+  },
+  {
+    "": "Big Data and the Cloud",
+    "name": "Paul Deitel",
     "title": "Intro to Python for Computer Science and Data Science: Learning to Program with Ai"
   },
   {
-    "cover": "[B@22b39cec",
+    "": "Big Data and the Cloud",
+    "name": "Harvey Deitel",
+    "title": "Intro to Python for Computer Science and Data Science: Learning to Program with Ai"
+  },
+  {
     "": "",
-    "year": "2018-01-01",
-    "author": "Pedro Domingos",
-    "edition": "1",
-    "publisher": "Basic Books",
-    "book_id": "16",
+    "name": "Pedro Domingos",
     "title": "The Master Algorithm: How the Quest for the Ultimate Learning Machine Will Remake Our World"
   },
   {
-    "cover": "[B@798d30b5",
     "": "",
-    "year": "2014-01-01",
-    "author": "William Gibson",
-    "edition": "1",
-    "publisher": "Editora Aleph",
-    "book_id": "17",
+    "name": "William Gibson",
     "title": "Neuromancer"
   },
   {
-    "cover": "1",
-    "": "1994-01-01",
-    "year": "Ralph Johnson Dr",
-    "author": "Erich Gamma",
-    "edition": "Richard Helm",
-    "publisher": "John Vlissides",
-    "book_id": "18",
+    "": "",
+    "name": "Erich Gamma",
     "title": "Design Patterns: Elements of Reusable Object-Oriented Software"
   },
   {
-    "cover": "Aleph",
-    "": "[B@2a17bdb0",
-    "year": "1",
-    "author": "William Gibson",
-    "edition": "Bruce Sterling",
-    "publisher": "2012-01-01",
-    "book_id": "19",
+    "": "",
+    "name": "Richard Helm",
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software"
+  },
+  {
+    "": "",
+    "name": "Ralph Johnson Dr",
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software"
+  },
+  {
+    "": "",
+    "name": "John Vlissides",
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software"
+  },
+  {
+    "": "",
+    "name": "William Gibson",
     "title": "A Máquina Diferencial"
   },
   {
-    "cover": "[B@2c3273fb",
     "": "",
-    "year": "2020-01-01",
-    "author": "William Gibson",
-    "edition": "1",
-    "publisher": "Aleph",
-    "book_id": "20",
+    "name": "Bruce Sterling",
+    "title": "A Máquina Diferencial"
+  },
+  {
+    "": "",
+    "name": "William Gibson",
     "title": "Periféricos"
   },
   {
-    "cover": "[B@48498d73",
     "": "",
-    "year": "2009-01-01",
-    "author": "Neal Stephenson",
-    "edition": "1",
-    "publisher": "William Morrow",
-    "book_id": "21",
+    "name": "Neal Stephenson",
     "title": "Cryptonomicon"
+  },
+  {
+    "": "",
+    "name": "Machado De Assis",
+    "title": "Memórias Póstumas De Brás Cubas - Edição especial"
   }
 ]

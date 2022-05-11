@@ -271,12 +271,12 @@ public class UI extends javax.swing.JFrame {
     private void ExportJSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportJSONButtonActionPerformed
         exportCSV();
         try {
-            InputStream is = new FileInputStream("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv");
+            InputStream is = new FileInputStream("out.csv");
             String csv = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
             // Convert csv text to JSON string, and save it 
             // to a data.json file.
             String json = CDL.toJSONArray(csv).toString(2);
-            Files.write(Path.of("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.json"), json.getBytes());
+            Files.write(Path.of("out.json"), json.getBytes());
         } catch (IOException e) {
             System.out.println(e);
         } catch (JSONException ex) {

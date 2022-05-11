@@ -1,1 +1,1 @@
-livrosdb,koller,password,PostgreSQL
+livrosdb,koller,password,MySQL
