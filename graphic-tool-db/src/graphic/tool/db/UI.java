@@ -36,12 +36,30 @@ public class UI extends javax.swing.JFrame {
      * Creates new form UI
      */
     public UI() {
-//        connection.setDatabase("dblivros");
-//        connection.setUser("koller");
-//        connection.setPassword("password");
         initComponents();
         ComboBoxDB.addItem("MySQL");
         ComboBoxDB.addItem("PostgreSQL");
+        
+        try{
+            FileReader file = new FileReader("conn.txt");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+
+            if(!"".equals(line) && line != null){
+                String[] strings = line.split(",");
+                DatabaseTextField.setText(strings[0]);
+                UserTextField.setText(strings[1]);
+                PasswordTextField.setText(strings[2]);
+                ComboBoxDB.setSelectedItem(strings[3]);
+            }
+            buffer.close();
+            file.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -318,6 +336,15 @@ public class UI extends javax.swing.JFrame {
         String user = UserTextField.getText();
         String password = PasswordTextField.getText();
         String DB = (String) ComboBoxDB.getSelectedItem();
+        
+        try {
+            FileWriter conFile = new FileWriter("conn.txt");
+            conFile.write(database + "," + user + "," + password + "," + DB);
+            conFile.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(database);
         DefaultMutableTreeNode tables = new DefaultMutableTreeNode("Tables and Views");
@@ -374,7 +401,7 @@ public class UI extends javax.swing.JFrame {
         try {
             TableModel model = ResultTable.getModel();
             FileWriter csv;
-            csv = new FileWriter(new File("/home/guilhermekoller/Documents/Repos/graphic-tool-db/graphic-tool-db/out.csv"));
+            csv = new FileWriter(new File("./out.csv"));
 
             for (int i = 0; i < model.getColumnCount(); i++) {
                 csv.write(model.getColumnName(i) + ", ");

@@ -1,3 +1,0 @@
-dblivros
-koller
-password
