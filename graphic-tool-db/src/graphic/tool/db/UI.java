@@ -55,7 +55,7 @@ public class UI extends javax.swing.JFrame {
 
         LeftPanel = new javax.swing.JPanel();
         ScrollTreePanel = new javax.swing.JScrollPane();
-        LimitRowsTextField = new javax.swing.JTree();
+        ConnectionsTree = new javax.swing.JTree();
         MainPanel = new javax.swing.JTabbedPane();
         QueriesPannel = new javax.swing.JPanel();
         TableScrollPanel = new javax.swing.JScrollPane();
@@ -78,9 +78,9 @@ public class UI extends javax.swing.JFrame {
 
         LeftPanel.setBackground(new java.awt.Color(230, 235, 230));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Connections");
-        LimitRowsTextField.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        ScrollTreePanel.setViewportView(LimitRowsTextField);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Database");
+        ConnectionsTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ScrollTreePanel.setViewportView(ConnectionsTree);
 
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
@@ -318,15 +318,13 @@ public class UI extends javax.swing.JFrame {
         String user = UserTextField.getText();
         String password = PasswordTextField.getText();
         String DB = (String) ComboBoxDB.getSelectedItem();
-        System.out.println(DB);
 
-        DefaultTreeModel model = (DefaultTreeModel) LimitRowsTextField.getModel();
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-        model.insertNodeInto(new DefaultMutableTreeNode(database), root, root.getChildCount());
-
-        DefaultTreeModel child = (DefaultTreeModel) LimitRowsTextField.getModel();
-        DefaultMutableTreeNode root2 = (DefaultMutableTreeNode) child.getRoot();
-        child.insertNodeInto(new DefaultMutableTreeNode("teste"), root2, root2.getChildCount());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(database);
+        DefaultMutableTreeNode tables = new DefaultMutableTreeNode("Tables and Views");
+        
+        root.add(tables);
+        
+        ConnectionsTree.setModel(new DefaultTreeModel(root));
 
         try {
             java.sql.Connection conn;
@@ -347,17 +345,20 @@ public class UI extends javax.swing.JFrame {
                 ResultSet tablesRs;
                 Statement stmtAux = conn.createStatement();
                 tablesRs = stmtAux.executeQuery("show columns from " + rs.getString(1));
+                
+                DefaultMutableTreeNode tableNode = new DefaultMutableTreeNode(rs.getString(1));
+                
                 while(tablesRs.next()){
                     if("PRI".equals(tablesRs.getString(4))){
-                        System.out.println(tablesRs.getString(1) + " PK");
+                        tableNode.add(new DefaultMutableTreeNode(tablesRs.getString(1) + " PK"));
+                        
                     }else if("MUL".equals(tablesRs.getString(4))){
-                        System.out.println(tablesRs.getString(1) + " FK");
+                        tableNode.add(new DefaultMutableTreeNode(tablesRs.getString(1) + " FK"));
                     }else{
-                        System.out.println(tablesRs.getString(1));
+                        tableNode.add(new DefaultMutableTreeNode(tablesRs.getString(1)));
                     }
-
                 }
-                System.out.println("----------");
+                tables.add(tableNode);
             }
 
         } catch (SQLException ex) {
@@ -449,13 +450,13 @@ public class UI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckBoxLimit;
     private javax.swing.JComboBox<String> ComboBoxDB;
+    private javax.swing.JTree ConnectionsTree;
     private javax.swing.JTextField DatabaseTextField;
     private javax.swing.JButton ExecuteButton;
     private javax.swing.JButton ExportCVSButton;
     private javax.swing.JButton ExportJSONButton;
     private javax.swing.JLabel Labelrow;
     private javax.swing.JPanel LeftPanel;
-    private javax.swing.JTree LimitRowsTextField;
     private javax.swing.JTabbedPane MainPanel;
     private javax.swing.JTextField MaxRowsTextField;
     private javax.swing.JTextField PasswordTextField;
